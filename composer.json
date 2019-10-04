@@ -1,5 +1,11 @@
 {
   "name": "myks92/vmc-event",
+  "description": "Модуль мероприятий",
+  "keywords": [
+    "vmc",
+    "vmc-event"
+  ],
+  "license": "BSD-3-Clause",
   "version": "1.0.0",
   "require": {
     "php": ">=7.1.0",
