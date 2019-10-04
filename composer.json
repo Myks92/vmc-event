@@ -1,0 +1,27 @@
+{
+  "name": "myks92/vmc-event",
+  "version": "1.0.0",
+  "require": {
+    "php": ">=7.1.0",
+    "yiisoft/yii2": "2.*",
+    "kartik-v/yii2-widget-select2": "dev-master",
+    "yiisoft/yii2-bootstrap4": "^2.0",
+    "elisdn/yii2-composite-form": "^1.1",
+    "la-haute-societe/yii2-save-relations-behavior": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Myks92\\Vmc\\Event\\": "src/"
+    }
+  },
+  "extra": {
+    "config-plugin": {
+      "params": [
+        "config/params.php"
+      ],
+      "web": [
+        "config/web.php"
+      ]
+    }
+  }
+}

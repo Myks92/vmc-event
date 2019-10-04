@@ -1,0 +1,11 @@
+.events-last-widgets .event-avatar-url {
+    max-height: 200px;
+    overflow: hidden;
+}
+.list-group-item .event-avatar-url {
+    display: block;
+    max-height: 100px;
+    max-width: 100px;
+    overflow: hidden;
+    border-radius: 2px;
+}
