@@ -15,7 +15,7 @@ use yii\widgets\MaskedInput;
 <div class="event-search">
 
     <?php $form = ActiveForm::begin([
-        'action' => Url::current(['index']),
+        'action' => Url::to(['index']),
         'method' => 'get',
         'options' => [
             'class' => 'form-ajax',

@@ -42,7 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
                 <div class="card-header pt-4">
                     <?php $form = ActiveForm::begin([
-                        'action' => Url::current(['index']),
+                        'action' => Url::to(['index']),
                         'method' => 'get',
                         'options' => [
                             'class' => 'form-ajax',
