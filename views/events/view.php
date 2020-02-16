@@ -5,6 +5,7 @@ use Myks92\Vmc\Event\Model\Entity\Events\Event;
 use Myks92\Vmc\Event\Model\Entity\Events\Url;
 use Myks92\Vmc\Event\Security\Access\Events\EventChecker;
 use Myks92\Vmc\Event\Widget\Events\Poster;
+use Myks92\Vmc\Event\Widget\Events\QRCode;
 use Myks92\Vmc\Event\Widget\Menu;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
@@ -241,6 +242,21 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?php else: ?>
                     <div class="card-body"><?= Yii::$app->formatter->nullDisplay ?></div>
                 <?php endif; ?>
+            </div>
+
+            <div class="card shadow-sm mb-3">
+                <div class="card-header">
+                    <?= Yii::t('event-event', 'TITLE_EVENT_QR') ?>
+                </div>
+                <span class="card-body">
+                    <div class="card-img-wrap float-left pr-2" style="max-width: 100px">
+                        <?= QRCode::widget([
+                            'name' => $model->getId()->getValue().'.png',
+                            'imageOptions' => ['class' => 'float=left']
+                        ])?>
+                    </div>
+                    <div class="text-muted">Просканируй или сохрани этот QR-код для быстрого доступа</div>
+                </div>
             </div>
 
         </div>

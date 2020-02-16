@@ -21,6 +21,8 @@ use Myks92\Vmc\Event\Model\UseCase\Events\View;
 use Myks92\Vmc\Event\ReadModel\Events\Filter;
 use Myks92\Vmc\Event\Security\Access\Events\EventChecker;
 use Myks92\Vmc\Event\Service\Uploader\FileUploader;
+use Myks92\Vmc\Event\Service\Uploader\QRUploadedFile;
+use Myks92\Vmc\Event\Service\Uploader\QRUploader;
 use RuntimeException;
 use Throwable;
 use Yii;
@@ -32,6 +34,7 @@ use yii\base\Module;
 use yii\db\StaleObjectException;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
+use yii\helpers\Html;
 use yii\web\Controller;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
@@ -121,43 +124,6 @@ class EventsController extends Controller
     }
 
     /**
-     * @param $id
-     * @return string
-     * @throws InvalidArgumentException
-     * @throws InvalidConfigException
-     * @throws NotFoundHttpException
-     * @throws RuntimeException
-     * @throws StaleObjectException
-     * @throws Throwable
-     */
-    public function actionView($id)
-    {
-        $event = $this->findModel($id);
-        $handler = Yii::createObject(View\Handler::class);
-
-        $handler->handle(new View\Command($event->getId()->getValue()));
-
-        return $this->render('view', [
-            'model' => $event,
-            'checker' => $this->checker
-        ]);
-    }
-
-    /**
-     * @param $id
-     * @return Event
-     * @throws NotFoundHttpException
-     */
-    protected function findModel($id)
-    {
-        if (($model = Event::findOne($id)) !== null) {
-            return $model;
-        }
-
-        throw new NotFoundHttpException(Yii::t('event-event', 'Запрашиваемая страница не найдена.'));
-    }
-
-    /**
      * @return string|Response
      * @throws InvalidArgumentException
      * @throws InvalidConfigException
@@ -225,6 +191,32 @@ class EventsController extends Controller
         return $this->render('update', [
             'model' => $event,
             'editForm' => $form,
+        ]);
+    }
+
+    /**
+     * @param $id
+     * @return string
+     * @throws InvalidArgumentException
+     * @throws InvalidConfigException
+     * @throws NotFoundHttpException
+     * @throws RuntimeException
+     * @throws StaleObjectException
+     * @throws Throwable
+     */
+    public function actionView($id)
+    {
+        $event = $this->findModel($id);
+        $handler = Yii::createObject(View\Handler::class);
+        $uploader = Yii::createObject(QRUploader::class);
+
+        $uploader->upload(new QRUploadedFile(Yii::$app->urlManager->createAbsoluteUrl(['/events/events/view', 'id' => $id]), $id));
+
+        $handler->handle(new View\Command($event->getId()->getValue()));
+
+        return $this->render('view', [
+            'model' => $event,
+            'checker' => $this->checker
         ]);
     }
 
@@ -528,5 +520,19 @@ class EventsController extends Controller
         }
 
         return $this->redirect(['index']);
+    }
+
+    /**
+     * @param $id
+     * @return Event
+     * @throws NotFoundHttpException
+     */
+    protected function findModel($id)
+    {
+        if (($model = Event::findOne($id)) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException(Yii::t('event-event', 'Запрашиваемая страница не найдена.'));
     }
 }

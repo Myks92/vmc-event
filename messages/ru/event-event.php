@@ -12,6 +12,7 @@ return [
     'TITLE_EVENT_URLS' => 'Ссылки',
     'TITLE_EVENT_CONTACTS' => 'Контакты',
     'TITLE_EVENT_PLACES' => 'Площадки',
+    'TITLE_EVENT_QR' => 'QR-код',
 
     //Модель
     'Poster' => 'Афиша',

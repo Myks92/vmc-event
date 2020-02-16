@@ -4,6 +4,7 @@ use app\modules\geo\models\GeoCity;
 use Myks92\Vmc\Event\Model\Entity\Places\CityInterface;
 use Myks92\Vmc\Event\Model\EventDispatcherInterface;
 use Myks92\Vmc\Event\Module;
+use Myks92\Vmc\Event\Service\Uploader\QRUploader;
 use Myks92\Vmc\Event\Service\Uploader\FileUploader;
 use yii\di\Container;
 use yii\rbac\CheckAccessInterface;
@@ -73,7 +74,15 @@ return [
                 return Yii::$app->user->getIdentity();
             },
             FileUploader::class => static function () {
-                return new Myks92\Vmc\Event\Service\Uploader\FileUploader(Yii::getAlias('@staticRoot/origin/images/events'));
+                return new Myks92\Vmc\Event\Service\Uploader\FileUploader(
+                    Yii::getAlias('@staticRoot/origin/images/events')
+                );
+            },
+            QRUploader::class => static function () {
+                return new Myks92\Vmc\Event\Service\Uploader\QRUploader(
+                    Yii::getAlias('@staticRoot/origin/images/events/qr'),
+                    new Endroid\QrCode\QrCode()
+                );
             },
             CityInterface::class => GeoCity::class
         ],

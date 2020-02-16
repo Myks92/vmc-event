@@ -6,14 +6,15 @@
     "vmc-event"
   ],
   "license": "BSD-3-Clause",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "require": {
     "php": ">=7.1.0",
     "yiisoft/yii2": "2.*",
     "kartik-v/yii2-widget-select2": "dev-master",
     "yiisoft/yii2-bootstrap4": "^2.0",
     "elisdn/yii2-composite-form": "^1.1",
-    "la-haute-societe/yii2-save-relations-behavior": "*"
+    "la-haute-societe/yii2-save-relations-behavior": "*",
+    "endroid/qr-code": "3.7.*"
   },
   "autoload": {
     "psr-4": {
